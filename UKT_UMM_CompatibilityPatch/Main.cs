@@ -22,6 +22,7 @@ namespace ULTRAKIT.UMM_Compatibility
 {
     [BepInPlugin("ULTRAKIT.umm_compat", "ULTRAKIT Reloaded UMM Compatibility Patch", "1.0.0")]
     [BepInDependency("UMM", "0.5.1")]
+    [BepInDependency("ULTRAKIT.core_module", "2.0.1")]
     public class Plugin : BaseUnityPlugin
     {
         public static Plugin plugin;
@@ -47,16 +48,17 @@ namespace ULTRAKIT.UMM_Compatibility
             {
                 UKKeySetting setting = Registries.key_registry[state.Key];
                 UKKeyBind binding = UKAPI.GetKeyBind(setting.Name);
-                if (PrefsManager.Instance.HasKey(setting.Binding.PrefName))
-                    binding.ChangeKeyBind((KeyCode)PrefsManager.Instance.GetInt(setting.Binding.PrefName, (int)setting.Key));
                 binding.OnBindingChanged.AddListener((KeyCode key) =>
                 {
                     instance.Inputs[setting.Binding.Name] = key;
-                    PrefsManager.instance.SetInt("keyBinding." + setting.Binding.Name, (int)key);
+                    PrefsManager.instance.SetInt(setting.Binding.PrefName, (int)key);
                     setting.SetValue(key);
                     instance.UpdateBindings();
                 });
+                if (PrefsManager.Instance.HasKey(setting.Binding.PrefName))
+                    binding.ChangeKeyBind((KeyCode)PrefsManager.Instance.GetInt(setting.Binding.PrefName, (int)setting.Key));
             }
+            instance.UpdateBindings();
         }
     }
 }
