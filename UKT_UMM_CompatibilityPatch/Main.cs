@@ -22,7 +22,7 @@ namespace ULTRAKIT.UMM_Compatibility
 {
     [BepInPlugin("ULTRAKIT.umm_compat", "ULTRAKIT Reloaded UMM Compatibility Patch", "1.0.0")]
     [BepInDependency("UMM", "0.5.1")]
-    [BepInDependency("ULTRAKIT.core_module", "2.0.1")]
+    [BepInDependency("ULTRAKIT.core_module", "2.1.0")]
     public class Plugin : BaseUnityPlugin
     {
         public static Plugin plugin;
