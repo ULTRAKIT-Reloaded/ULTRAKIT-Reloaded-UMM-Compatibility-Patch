@@ -16,6 +16,7 @@ using ULTRAKIT.Loader;
 using ULTRAKIT.Extensions.ObjectClasses;
 using HarmonyLib;
 using ULTRAKIT.Loader.Injectors;
+using ULTRAKIT.Extensions;
 
 namespace ULTRAKIT.UMM_Compatibility
 {
@@ -37,22 +38,23 @@ namespace ULTRAKIT.UMM_Compatibility
     [HarmonyPatch(typeof(KeybindsInjector))]
     public class KeybindsInjectorPostfix
     {
-        [HarmonyPatch("OnEnablePostfix"), HarmonyPostfix]
-        static void OnEnablePostfixPostfix()
+        [HarmonyPatch("SetKeys"), HarmonyPostfix]
+        static void SetKeysPostfix(InputManager instance)
         {
+            UKLogger.Log("Compatibility Patch Active");
             Registries.key_states = Registries.key_registry.ToDictionary(item => item.Key, item => UKAPI.GetKeyBind(item.Value.Name, item.Value.Binding.DefaultKey) as InputActionState);
             foreach (var state in Registries.key_states)
             {
                 UKKeySetting setting = Registries.key_registry[state.Key];
                 UKKeyBind binding = UKAPI.GetKeyBind(setting.Name);
                 if (PrefsManager.Instance.HasKey(setting.Binding.PrefName))
-                    binding.ChangeKeyBind((KeyCode)MonoSingleton<PrefsManager>.Instance.GetInt(setting.Binding.PrefName, (int)setting.Key));
+                    binding.ChangeKeyBind((KeyCode)PrefsManager.Instance.GetInt(setting.Binding.PrefName, (int)setting.Key));
                 binding.OnBindingChanged.AddListener((KeyCode key) =>
                 {
-                    InputManager.instance.Inputs[setting.Binding.Name] = key;
+                    instance.Inputs[setting.Binding.Name] = key;
                     PrefsManager.instance.SetInt("keyBinding." + setting.Binding.Name, (int)key);
                     setting.SetValue(key);
-                    InputManager.instance.UpdateBindings();
+                    instance.UpdateBindings();
                 });
             }
         }
