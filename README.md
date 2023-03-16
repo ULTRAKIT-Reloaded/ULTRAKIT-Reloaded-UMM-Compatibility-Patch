@@ -7,7 +7,7 @@ Merges the keybinds system of ULTRAKIT Reloaded and UltraModManager to prevent c
 2. Go to the releases page and download UKT-UMM-Patch.dll
 3. Move UKT-UMM-Patch.dll to [Your ULTRAKILL Directory]\BepInEx\plugins\
 ### ALTERNATE INSTALLATION
-Download the patch using [Thunderstore Mod Manager](https://thunderstore.io/c/ultrakill/p/ULTRAKIT/ULTRAKIT_Reloaded/) to automatically install the patch alongside ULTRAKIT Reloaded and UltraModManager.
+Download the patch using [Thunderstore Mod Manager](https://thunderstore.io/c/ultrakill/p/ULTRAKIT/UKT_UMM_CompatPatch/) to automatically install the patch alongside ULTRAKIT Reloaded and UltraModManager.
 
 ##
 
