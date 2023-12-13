@@ -13,16 +13,16 @@ using UnityEditor;
 using System.Reflection;
 using BepInEx.Bootstrap;
 using ULTRAKIT.Loader;
-using ULTRAKIT.Extensions.ObjectClasses;
+using ULTRAKIT.Extensions.Classes;
 using HarmonyLib;
 using ULTRAKIT.Loader.Injectors;
 using ULTRAKIT.Extensions;
 
 namespace ULTRAKIT.UMM_Compatibility
 {
-    [BepInPlugin("ULTRAKIT.umm_compat", "ULTRAKIT Reloaded UMM Compatibility Patch", "1.0.0")]
+    [BepInPlugin("ULTRAKIT.umm_compat", "ULTRAKIT Reloaded UMM Compatibility Patch", "1.0.1")]
     [BepInDependency("UMM", "0.5.1")]
-    [BepInDependency("ULTRAKIT.core_module", "2.1.0")]
+    [BepInDependency("ULTRAKIT.core_module", "2.3.0")]
     public class Plugin : BaseUnityPlugin
     {
         public static Plugin plugin;
